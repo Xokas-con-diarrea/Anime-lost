@@ -1,0 +1,129 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Abyss Hub [INVASION 2.5!] Anime Lost Simulator", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+------VALUES--------
+_G.autoSwing = true
+_G.autoSkill = true
+--FUNCTIONS
+function autoswing()
+    while _G.autoSwing == true do
+        game:GetService("ReplicatedStorage").Modules.LBConnection.Remotes.attackFunc:FireServer()
+        wait(.00001)
+    end
+end
+
+function autoskill()
+    while _G.autoSkill == true do
+        game:GetService("ReplicatedStorage").Remotes["Send Information"]:FireServer("Slot1")
+        wait(.00001)
+     end
+end
+
+function sarnek()
+   game:GetService("ReplicatedStorage").Remotes.portalTeleport:FireServer("Sarnek")
+end
+    
+function naruto()
+    game:GetService("ReplicatedStorage").Remotes.portalTeleport:FireServer("Ninja Town")
+    end
+    
+function kny()
+    game:GetService("ReplicatedStorage").Remotes.portalTeleport:FireServer("Demon Hill")
+    end
+    
+function op()   
+    game:GetService("ReplicatedStorage").Remotes.portalTeleport:FireServer("Pirate Sea")
+    end
+function antiafk()
+    local vu = game:GetService("VirtualUser")
+    game:GetService("Players").LocalPlayer.Idled:connect(function()
+      vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+       wait(1)
+       vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+    end)
+end
+
+--TABS
+local FarmTab = Window:MakeTab({
+	Name = "AutoFarm",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local TPTab = Window:MakeTab({
+	Name = "Teleport",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local MiscTab = Window:MakeTab({
+	Name = "Misc",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local DevTab = Window:MakeTab({
+	Name = "Dev",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+---TOGGLES 
+FarmTab:AddToggle({
+	Name = "Auto Swing",
+	Default = false,
+	Callback = function(Value)
+    _G.autoSwing = Value
+    autoswing()
+    end
+})
+
+FarmTab:AddToggle({
+	Name = "Auto Skill",
+	Default = false,
+	Callback = function(Value)
+    _G.autoSkill = Value
+    autoskill()
+    end
+})
+
+--BUTTONS
+TPTab:AddButton({
+	Name = "Sarnek",
+	Callback = function()
+      		sarnek()
+  	end    
+})
+
+TPTab:AddButton({
+	Name = "Ninja Town",
+	Callback = function()
+      		naruto()
+  	end    
+})
+
+TPTab:AddButton({
+	Name = "Demon Hill",
+	Callback = function()
+      		kny()
+  	end    
+})
+
+TPTab:AddButton({
+	Name = "Pirate Sea",
+	Callback = function()
+      		op()
+  	end    
+})
+
+MiscTab:AddButton({
+	Name = "Anti-AFK",
+	Callback = function()
+      		antiafk()
+  	end    
+})
+
+
+
+
+OrionLib:Init()
